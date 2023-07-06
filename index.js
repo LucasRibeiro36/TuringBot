@@ -3,7 +3,7 @@ import DenunciaController from './controller/denunciaController.js';
 import UserController from './controller/userController.js';
 import DownloadUtil from './util/DownloadUtil.js';
 
-class WhatsAppBot {
+class TuringBot {
   constructor() {
     this.client = null;
     this.denunciaController = null;
@@ -35,12 +35,12 @@ class WhatsAppBot {
   async handleMessage(message) {
     if (!message.isGroupMsg) {
       console.log(message);
-      if (message.body === '/addUsuario') {
-        this.userController.addUsuario(message);
-      } else if (message.body === '/listarUsuarios') {
-        this.userController.listarUsuarios(message);
-      } else if (message.body === '/delUsuario') {
-        this.userController.removerUsuario(message);
+      if (message.body === '/addAdmin') {
+        this.userController.addAdmin(message);
+      } else if (message.body === '/listarAdmins') {
+        this.userController.listarAdmins(message);
+      } else if (message.body === '/delAdmin') {
+        this.userController.removerAdmin(message);
       } else if (message.body === '/denunciar') {
         this.denunciaController.criarDenuncia(message);
       } else if (message.body === '/listarDenuncias') {
@@ -51,9 +51,9 @@ class WhatsAppBot {
           if (await this.userController.verificacao(message)) {
             const helpMessage =
               "Comandos disponíveis:\n" +
-              "/addUsuario - Adiciona um usuário\n" +
-              "/listarUsuarios - Lista os usuários\n" +
-              "/delUsuario - Remove um usuário\n" +
+              "/addAdmin - Adiciona um usuário\n" +
+              "/listarAdmins - Lista os usuários\n" +
+              "/delAdmin - Remove um usuário\n" +
               "/denunciar - Cria uma denúncia\n" +
               "/listarDenuncias - Lista as denúncias\n" +
               "/mostrarDenuncia - Mostra uma denúncia\nExemplo: /mostrarDenuncia DenunciaID\n" +
@@ -103,5 +103,5 @@ class WhatsAppBot {
   }
 }
 
-const bot = new WhatsAppBot();
+const bot = new TuringBot();
 bot.start();

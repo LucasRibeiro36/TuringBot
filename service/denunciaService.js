@@ -95,8 +95,13 @@ class DenunciaService {
       // Truncar a tabela Denuncia
       await Denuncia.destroy({ where: {}, truncate: false, cascade: true, transaction });
   
-      // Apagar arquivos de prova
-      await util.promisify(fs.rmdir)('./provas', { recursive: true });
+      // Apagar arquivos de prova sem deletar o diretorio
+      const deleteFile = util.promisify(fs.unlink);
+      const files = await fs.promises.readdir('./provas');
+      for (const file of files) {
+        await deleteFile(`./provas/${file}`);
+      }
+
   
       // Confirmar a transação
       await transaction.commit();

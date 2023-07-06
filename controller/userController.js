@@ -6,7 +6,7 @@ class UserController {
     this.client = client;
   }
 
-  async addUsuario(message) {
+  async addAdmin(message) {
     if (await this.verificacao(message) == true) {
       await this.client.sendText(message.from, 'Qual é o nome?');
       const userNomePromise = new Promise((resolve) => {
@@ -42,7 +42,7 @@ class UserController {
     }
   }
 
-  async listarUsuarios(message) {
+  async listarAdmins(message) {
     if (await this.verificacao(message) == true){
         await this.client.sendText(message.from, 'Listando usuários...');
         try {
@@ -61,7 +61,7 @@ class UserController {
   }
   
 
-    async removerUsuario(message) {
+    async removerAdmin(message) {
         if (await this.verificacao(message) == true) {
             await this.client.sendText(message.from, 'Qual é o ID do usuário?');
             const userNomePromise = new Promise((resolve) => {
@@ -86,14 +86,14 @@ class UserController {
     }
 
     async verificacao(message) {
-        const usuarios = await UserService.listUsers();
+        const Admins = await UserService.listUsers();
         const from = message.from;
       
-        for (const usuario of usuarios) {
-          console.log(PhoneNumber(usuario.telefone, 'BR').nationalNumber);
+        for (const Admin of Admins) {
+          console.log(PhoneNumber(Admin.telefone, 'BR').nationalNumber);
           console.log(PhoneNumber(from, 'BR').nationalNumber);
       
-          if (PhoneNumber(usuario.telefone, 'BR').nationalNumber === PhoneNumber(from, 'BR').nationalNumber) {
+          if (PhoneNumber(Admin.telefone, 'BR').nationalNumber === PhoneNumber(from, 'BR').nationalNumber) {
             return true; // Sai da função e retorna true
           }
         }
