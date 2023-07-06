@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "Apache-2.0 license",
   "type": "module",
   "dependencies": {
     "@wppconnect-team/wppconnect": "https://github.com/wppconnect-team/wppconnect/releases/download/nightly/wppconnect-nightly.tgz",
