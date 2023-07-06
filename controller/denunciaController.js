@@ -19,8 +19,9 @@ class DenunciaController {
         if (userMessage.from === message.from) {
           if (message.mimetype){
             this.client.sendText(message.from, 'Não entendi, envie a denúncia em formato de texto, as provas são enviadas depois');
+          } else {
+            resolve(userMessage);
           }
-          resolve(userMessage);
         }
       };
 
@@ -44,8 +45,6 @@ class DenunciaController {
             resolve(provas);
           } else if (userMessage.mimetype) {
             provas.push(this.downloadUtil.downloadMedia(userMessage));
-          } else {
-            this.client.sendText(message.from, 'Não entendi, envie as provas da denúncia em formato de arquivo');
           }
         }
       };
@@ -54,8 +53,9 @@ class DenunciaController {
       this.client.onMessage(listener);
     });
 
-    // Aguarda a resolução da promessa e captura as provas do usuário
+    
     const userProvas = await userProvasPromise;
+    
     console.log('Provas:', userProvas);
 
     // Resolve as promessas das provas para obter os valores reais
