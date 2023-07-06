@@ -15,7 +15,6 @@
     "libphonenumber-js": "^1.10.37",
     "mysql2": "^3.4.5",
     "puppeteer": "^20.7.4",
-    "sequelize": "^6.32.1",
-    "sqlite3": "^5.1.6"
+    "sequelize": "^6.32.1"
   }
 }
