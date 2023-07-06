@@ -1,0 +1,21 @@
+{
+  "name": "bot-denuncie",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@wppconnect-team/wppconnect": "https://github.com/wppconnect-team/wppconnect/releases/download/nightly/wppconnect-nightly.tgz",
+    "libphonenumber-js": "^1.10.37",
+    "mysql2": "^3.4.5",
+    "puppeteer": "^20.7.4",
+    "sequelize": "^6.32.1",
+    "sqlite3": "^5.1.6"
+  }
+}
