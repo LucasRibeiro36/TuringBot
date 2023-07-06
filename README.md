@@ -9,7 +9,7 @@ Certifique-se de ter o Node.js instalado em seu sistema. Em seguida, siga as eta
 1. Clone o repositório do TuringBot:
 
    ```bash
-   git clone <URL_DO_REPOSITÓRIO>
+   git clone https://github.com/LucasRibeiro36/TuringBot.git
    ```
 
 2. Navegue até o diretório do projeto:
