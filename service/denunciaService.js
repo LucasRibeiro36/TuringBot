@@ -1,6 +1,8 @@
 import Denuncia from '../model/denunciaModel.js';
 import Prova from '../model/provaModel.js';
 import sequelize from '../config/database.js';
+import fs from 'fs';
+import util from 'util';
 
 class DenunciaService {
   static async criarDenuncia(from, msg, date, provas) {
@@ -82,13 +84,36 @@ class DenunciaService {
   }
 
   static async deletarDenuncias() {
+    let transaction;
+  
     try {
-      await Denuncia.destroy({ truncate: true });
+      transaction = await sequelize.transaction();
+  
+      // Excluir os registros da tabela Prova
+      await Prova.destroy({ where: {}, truncate: false, transaction });
+  
+      // Truncar a tabela Denuncia
+      await Denuncia.destroy({ where: {}, truncate: false, cascade: true, transaction });
+  
+      // Apagar arquivos de prova
+      await util.promisify(fs.rmdir)('./provas', { recursive: true });
+  
+      // Confirmar a transação
+      await transaction.commit();
+  
       return 'Denúncias excluídas com sucesso.';
     } catch (error) {
-      throw new Error('Não foi possível excluir as denúncias.');
+      // Desfazer a transação em caso de erro
+      if (transaction) {
+        await transaction.rollback();
+      }
+  
+      throw new Error(error.message);
     }
   }
+  
+  
+  
 
   static async listarDenuncias() {
     try {
