@@ -7,7 +7,7 @@
     "test": "nodemon index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "LucasRibeiro36",
   "license": "ISC",
   "type": "module",
   "dependencies": {
