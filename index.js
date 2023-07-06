@@ -15,9 +15,9 @@ class WhatsAppBot {
     try {
       this.client = await wppconnect.create({
         // ...
-        session: 'Bot-Denuncie',
+        session: 'TuringBot',
         puppeteerOptions: {
-          userDataDir: './tokens/Bot-Denuncie', // or your custom directory
+          userDataDir: './tokens/TuringBot', // or your custom directory
           headless: true,
         },
         // ...
@@ -81,19 +81,19 @@ class WhatsAppBot {
 
           if (hour >= 0 && hour < 4) {
             greetingMessage = 'Boa noite';
-            additionalMessage = 'Agradecemos por nos contatar durante a noite. Como podemos ajudar?';
+            additionalMessage = 'Agradecemos por nos contatar durante a noite.\nDigite /help para ver os comandos disponíveis';
           } else if (hour >= 4 && hour < 12) {
             greetingMessage = 'Bom dia';
-            additionalMessage = 'Tenha um ótimo dia! Em que podemos auxiliar?';
+            additionalMessage = 'Tenha um ótimo dia! \nDigite /help para ver os comandos disponíveis';
           } else if (hour >= 12 && hour < 18) {
             greetingMessage = 'Boa tarde';
-            additionalMessage = 'Esperamos que seu dia esteja indo bem. Como podemos ser úteis?';
+            additionalMessage = 'Esperamos que seu dia esteja indo bem. \nDigite /help para ver os comandos disponíveis';
           } else {
             greetingMessage = 'Boa noite';
-            additionalMessage = 'Obrigado por entrar em contato. Como podemos ajudar?';
+            additionalMessage = 'Obrigado por entrar em contato. \nDigite /help para ver os comandos disponíveis';
           }
 
-          const fullMessage = `${greetingMessage}, seja bem-vindo(a) sou o DenuncieBot!!!\n${additionalMessage}`;
+          const fullMessage = `${greetingMessage}, seja bem-vindo(a) sou o TuringBot!!!\n${additionalMessage}`;
           this.client.sendText(message.from, fullMessage);
         }
 
