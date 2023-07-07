@@ -2,6 +2,7 @@ import wppconnect from '@wppconnect-team/wppconnect';
 import DenunciaController from './controller/denunciaController.js';
 import UserController from './controller/userController.js';
 import DownloadUtil from './util/DownloadUtil.js';
+import StickerController from './controller/stickerController.js';
 
 class TuringBot {
   constructor() {
@@ -25,6 +26,7 @@ class TuringBot {
 
       this.denunciaController = new DenunciaController(this.client);
       this.userController = new UserController(this.client);
+      this.stickerController = new StickerController(this.client);
 
       this.client.onMessage(this.handleMessage.bind(this));
     } catch (error) {
@@ -66,7 +68,9 @@ class TuringBot {
           }
       } else if (message.body.split(' ')[0] === "/mostrarDenuncia"){
         this.denunciaController.mostrarDenuncia(message);
-      } else {
+      } else if (message.caption === "/sticker"){
+        this.stickerController.createSticker(message);
+      }else {
         const GREETING_INTERVAL = 24 * 60 * 60 * 1000; // Intervalo de 24 horas em milissegundos
 
         const lastGreetingTime = this.sentGreetings.get(message.from);
